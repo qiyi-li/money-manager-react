@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  Link
 } from 'react-router-dom';
 import styled from 'styled-components';
 import Nav from './components/Nav';
@@ -13,6 +12,7 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+
   
 `;
 const Main = styled.div`
