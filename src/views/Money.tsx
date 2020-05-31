@@ -1,8 +1,14 @@
 import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
+import Icon from 'components/Icon';
 
 const TagsSection = styled.section`
+  flex-grow: 1;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   background-color:#fff;
   padding: 12px 16px;
   >ol{
@@ -85,6 +91,7 @@ const NumberPadSection = styled.section`
                 inset 0 5px 5px -5px rgba(0,0,0,0.25);
   }
   >.pad{
+    padding-bottom: 16px;
     display:flex;
     flex-wrap: wrap;
     >button{
@@ -93,25 +100,57 @@ const NumberPadSection = styled.section`
       width: 25%;
       height: 64px;
       position: relative;   
+      .icon{
+        fill:  #fd6600;
+        height: 1.3em;
+        width: 1.3em;
+        
+      }
+      &.ac{
+      color: #fd6600;
+      font-size: 1.3em;
+      }
+      &.ok{
+        font-size: 1.3em;
+          &.ok::before{
+            color: #fff;
+            text-align: center;
+            line-height: 60px;
+            content: 'ok';
+            position: absolute;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%,-50%);
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            background-color:#fd6600;
+          }
+      }
       &.selected::after{
-      content: '';
+        content: '';
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        height: 64px;
-        width: 64px;
-        background-color:rgba(0,0,0,0.1);
+        height: 60px;
+        width: 60px;
+        background-color:rgba(0,0,0,0.075);
         border-radius: 50%;
       }
+      
     }
   }
+`;
+const MyLayout = styled(Layout)`
+  display:flex;
+  flex-direction: column;
 `;
 
 
 function Money() {
   return (
-    <Layout>
+    <MyLayout>
       <TagsSection>
         <ol>
           <li>衣</li>
@@ -142,22 +181,28 @@ function Money() {
           <button className="selected">1</button>
           <button>2</button>
           <button>3</button>
-          <button>AC</button>
+          <button className="ac">AC</button>
           <button>4</button>
           <button>5</button>
           <button>6</button>
-          <button>+</button>
+          <button>
+            <Icon name="add"/>
+          </button>
           <button>7</button>
           <button>8</button>
           <button>9</button>
-          <button>-</button>
+          <button>
+            <Icon name="reduce"/>
+          </button>
           <button>.</button>
           <button>0</button>
-          <button>del</button>
-          <button>ok</button>
+          <button>
+            <Icon name="delete"/>
+          </button>
+          <button className="ok">ok</button>
         </div>
       </NumberPadSection>
-    </Layout>
+    </MyLayout>
   );
 }
 export default Money
