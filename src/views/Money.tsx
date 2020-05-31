@@ -73,7 +73,39 @@ const CategorySection = styled.section`
   }
 `;
 const NumberPadSection = styled.section`
-
+  display: flex;
+  flex-direction: column;
+  >.output{
+    background-color:#fff;
+    font-size: 36px;
+    line-height: 72px;
+    text-align:right;
+    padding: 0 16px;
+    box-shadow: inset 0 -5px 5px -5px rgba(0,0,0,0.25),
+                inset 0 5px 5px -5px rgba(0,0,0,0.25);
+  }
+  >.pad{
+    display:flex;
+    flex-wrap: wrap;
+    >button{
+      font-size: 18px;
+      border: none;
+      width: 25%;
+      height: 64px;
+      position: relative;   
+      &.selected::after{
+      content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        height: 64px;
+        width: 64px;
+        background-color:rgba(0,0,0,0.1);
+        border-radius: 50%;
+      }
+    }
+  }
 `;
 
 
@@ -105,9 +137,9 @@ function Money() {
         </ul>
       </CategorySection>
       <NumberPadSection>
-        <div>100</div>
-        <div>
-          <button>1</button>
+        <div className="output">100</div>
+        <div className="pad">
+          <button className="selected">1</button>
           <button>2</button>
           <button>3</button>
           <button>AC</button>
