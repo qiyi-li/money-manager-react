@@ -20,33 +20,7 @@ function Money() {
       <TagsSection/>
       <NoteSection/>
       <CategorySection/>
-      <NumberPadSection>
-        <div className="output">100</div>
-        <div className="pad">
-          <button className="selected">1</button>
-          <button>2</button>
-          <button>3</button>
-          <button className="ac">AC</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>
-            <Icon name="add"/>
-          </button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>
-            <Icon name="reduce"/>
-          </button>
-          <button>.</button>
-          <button>0</button>
-          <button>
-            <Icon name="delete"/>
-          </button>
-          <button className="ok">ok</button>
-        </div>
-      </NumberPadSection>
+      <NumberPadSection/>
     </MyLayout>
   );
 }
