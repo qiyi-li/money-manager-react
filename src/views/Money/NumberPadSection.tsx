@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, {useState} from 'react';
-import Icon from '../../components/Icon';
+// import Icon from '../../components/Icon';
 
 const Wrapper = styled.section`
   display: flex;
@@ -30,38 +30,42 @@ const Wrapper = styled.section`
         width: 1.3em;
         
       }
+      &.symbol{
+        color: #fd6600;
+        font-size:1.5em;
+      }
       &.ac{
-      color: #fd6600;
-      font-size: 1.3em;
+        color: #fd6600;
+        font-size: 1.3em;
       }
       &.ok{
         font-size: 1.3em;
           &.ok::before{
             color: #fff;
             text-align: center;
-            line-height: 60px;
+            line-height: 50px;
             content: 'ok';
             position: absolute;
             top: 50%;
             left: 50%; 
             transform: translate(-50%,-50%);
-            height: 60px;
-            width: 60px;
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
             background-color:#fd6600;
           }
       }
-      &.selected{
+      &:active:not(.ok):not(.symbol):not(.ac){
       font-weight: 700;
       }
-      &.selected::before{
+      &:active:not(.ok):not(.symbol):not(.ac)::before{
         content: '';
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        height: 60px;
-        width: 60px;
+        height: 50px;
+        width: 50px;
         background-color:rgba(0,0,0,0.075);
         border-radius: 50%;
       }
@@ -69,11 +73,19 @@ const Wrapper = styled.section`
     }
   }
 `;
-const NumberPadSection:React.FC=()=>{
-  const [output,setOutput]=useState('0')
-  const onclickButtonWrapper=(e:React.MouseEvent)=>{
-    const text= (e.target as HTMLButtonElement).textContent
-    if(text===null){return}
+const NumberPadSection: React.FC = () => {
+  const [output, _setOutput] = useState('0');
+  const setOutput = (output: string) => {
+    if (output.length > 16) {
+      output = output.slice(0, 16);
+    } else if (output.length === 0) {
+      output = '0';
+    }
+    _setOutput(output);
+  };
+  const onclickButtonWrapper = (e: React.MouseEvent) => {
+    const text = (e.target as HTMLButtonElement).textContent;
+    if (text === null) {return;}
     switch (text) {
       case '0':
       case '1':
@@ -85,17 +97,42 @@ const NumberPadSection:React.FC=()=>{
       case '7':
       case '8':
       case '9':
+        if (output === '0') {
+          setOutput(text);
+        } else {
+          setOutput(output + text);
+        }
+        break;
+      case '+':
+        if (output[output.length - 1] === '+') {return;}
+        else if (output[output.length - 1] === '-') {return;} else {
+          setOutput(output + text);
+        }
+        break;
+      case '-':
+        if (output[output.length - 1] === '-') {
+          return;
+        } else if (output[output.length - 1] === '+') {return;}
+        else {
+          setOutput(output + text);
+        }
+        break;
       case '.':
-        if(output ==='0'){
-          setOutput(text)
-        }else{
-          setOutput(output+text)
+        if (output.indexOf('.') >= 0) {return;} else {
+          setOutput(output + '.');
+        }
+        break;
+      case 'del':
+        if (output.length === 1) {
+          setOutput('');
+        } else {
+          setOutput(output.slice(0, -1));
         }
         break;
       case 'AC':
-        console.log(text);
+        setOutput('');
         break;
-        case 'ok':
+      case 'ok':
         console.log('确认');
         break;
     }
@@ -111,19 +148,22 @@ const NumberPadSection:React.FC=()=>{
         <button>4</button>
         <button>5</button>
         <button>6</button>
-        <button value={'+'}>
-          <Icon name="add"/>
+        <button className="symbol">
+          {/*<Icon name="add"/>*/}
+          +
         </button>
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button>
-          <Icon name="reduce"/>-
+        <button className="symbol">
+          {/*<Icon name="reduce"/>*/}
+          -
         </button>
         <button>.</button>
         <button>0</button>
-        <button>
-          <Icon name="delete"/>
+        <button className="symbol">
+          {/*<Icon name="delete"/>*/}
+          del
         </button>
         <button className="ok">ok</button>
       </div>
