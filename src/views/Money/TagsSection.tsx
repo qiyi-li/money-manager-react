@@ -34,34 +34,38 @@ const Wrapper = styled.section`
   }
 `;
 
-const TagsSection: React.FC=()=>{
-  const [tags,setTags]=useState<string[]>(['衣','食','住','行']);
-  const [selectedTags,setSelectedTags] = useState<string[]>([])
-  const onAddTag=()=>{
-    const tagName= window.prompt('新标签名称为：')
-    if(tagName!==null){
-      setTags([...tags,tagName])
+type Props = {
+  value: string[];
+  onChange: (selected:string[]) => void;
+}
+const TagsSection: React.FC<Props> = (props) => {
+  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
+  const selectedTags = props.value;
+  const onAddTag = () => {
+    const tagName = window.prompt('新标签名称为：');
+    if (tagName !== null) {
+      setTags([...tags, tagName]);
     }
-  }
-  const onToggleTag=(tag:string)=>{
-    const index=selectedTags.indexOf(tag);
-    if(index>=0){
+  };
+  const onToggleTag = (tag: string) => {
+    const index = selectedTags.indexOf(tag);
+    if (index >= 0) {
       // 意为：如果 tag 已被选中，就将 tag 从 setSelectedTags 里面移除
-      setSelectedTags(selectedTags.filter(t=>t!==tag))
-    }else{
-      setSelectedTags([...selectedTags,tag])
+      props.onChange(selectedTags.filter(t => t !== tag));
+    } else {
+      props.onChange([...selectedTags, tag]);
     }
 
-  }
-  const getClass=(tag:string)=>selectedTags.indexOf(tag) >=0 ? 'selected':'';
+  };
+  const getClass = (tag: string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : '';
 
 
-  return(
+  return (
     <Wrapper>
       <ol>
-        {tags.map(tag=>
+        {tags.map(tag =>
           <li key={tag} onClick={
-            ()=>{onToggleTag(tag);}
+            () => {onToggleTag(tag);}
           } className={getClass(tag)}>{tag}</li>
         )}
       </ol>

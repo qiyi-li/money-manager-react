@@ -21,11 +21,11 @@ const generateOutput=(text:string,output="0")=>{
         return output + '.';
       }
     case '+':
-      if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {return output;} else {
+      if (output[output.length - 1] === '+' || output[output.length - 1] === '-' || output[output.length - 1] === '.') {return output;} else {
         return output + text;
       }
     case '-':
-      if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {return output;} else {
+      if (output[output.length - 1] === '+' || output[output.length - 1] === '-' ||output[output.length - 1] === '.') {return output;} else {
         return output + text;
       }
     case 'del':

@@ -3,7 +3,11 @@ import { Wrapper } from './NumberPadSection/Wrapper';
 import {generateOutput} from './NumberPadSection/generateOutput';
 // import Icon from '../../components/Icon';
 
-const NumberPadSection: React.FC = () => {
+type Props={
+  value:number;
+  onChange:(value: number)=>void
+}
+const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState('0');
   const setOutput = (output: string) => {
     if (output.length > 16) {
@@ -17,8 +21,14 @@ const NumberPadSection: React.FC = () => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {return;}
     if (text==='ok'){
-      //TODO
-      return;
+      let result
+      if (output[output.length - 1] === '+' || output[output.length - 1] === '-'){
+        window.alert('请输入正确金额')
+      }else{
+        result=eval(output)
+      }
+      result===0? window.alert('请输入正确金额'):_setOutput('0')
+      props.onChange(result)
     }
     if ('0123456789.+-'.split('').concat(['del','ok','AC']).indexOf(text)>=0){
       setOutput( generateOutput(text,output) )
@@ -52,7 +62,7 @@ const NumberPadSection: React.FC = () => {
           {/*<Icon name="delete"/>*/}
           del
         </button>
-        <button className="ok">ok</button>
+        <button className="ok" >ok</button>
       </div>
     </Wrapper>
   )
