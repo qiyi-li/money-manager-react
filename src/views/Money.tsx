@@ -1,7 +1,6 @@
 import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
-import Icon from 'components/Icon';
 import {CategorySection} from './Money/CategorySection';
 import {NoteSection} from './Money/NoteSection';
 import {NumberPadSection} from './Money/NumberPadSection';
