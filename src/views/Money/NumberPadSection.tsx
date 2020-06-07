@@ -49,6 +49,9 @@ const NumberPadSection = styled.section`
             background-color:#fd6600;
           }
       }
+      &.selected{
+      font-weight: 700;
+      }
       &.selected::after{
         content: '';
         position: absolute;
