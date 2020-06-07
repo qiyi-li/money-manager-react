@@ -22,7 +22,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text==='ok'){
       let result
       if (output[output.length - 1] === '+' || output[output.length - 1] === '-'){
-        window.alert('请输入正确金额')
+        window.alert('计算错误')
       }else{
         result=eval(output)
       }
