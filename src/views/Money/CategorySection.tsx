@@ -42,7 +42,7 @@ const CategorySection:React.FC=()=>{
         {categoryList.map(c=>
           <li className={category===c? 'selected':''}
               onClick={()=>{setCategory(c)}}
-          >
+          key={c}>
             {categoryMap[c]}
             <div className="underline"/>
           </li>
