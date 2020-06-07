@@ -24,7 +24,8 @@ const NumberPadSection: React.FC<Props> = (props) => {
       if (output[output.length - 1] === '+' || output[output.length - 1] === '-'){
         window.alert('计算错误')
       }else{
-        result=eval(output)
+        // eslint-disable-next-line
+        result = eval(output);
       }
       result===0? window.alert('请输入正确金额'):_setOutput('0')
       props.onChange(result)
