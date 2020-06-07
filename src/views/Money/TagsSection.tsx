@@ -46,7 +46,7 @@ const TagsSection: React.FC=()=>{
   const onToggleTag=(tag:string)=>{
     const index=selectedTags.indexOf(tag);
     if(index>=0){
-      // 意为：如果 tag 已被选中，就复制所有没有被选中的 tag，作为新的 selectedTags
+      // 意为：如果 tag 已被选中，就将 tag 从 setSelectedTags 里面移除
       setSelectedTags(selectedTags.filter(t=>t!==tag))
     }else{
       setSelectedTags([...selectedTags,tag])
