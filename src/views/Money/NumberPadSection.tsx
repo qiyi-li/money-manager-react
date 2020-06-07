@@ -4,7 +4,6 @@ import {generateOutput} from './NumberPadSection/generateOutput';
 // import Icon from '../../components/Icon';
 
 type Props={
-  value:number;
   onChange:(value: number)=>void
 }
 const NumberPadSection: React.FC<Props> = (props) => {
