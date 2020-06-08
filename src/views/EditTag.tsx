@@ -5,18 +5,26 @@ import Layout from "components/Layout"
 import Icon from 'components/Icon';
 import {Button} from 'components/Button';
 import styled from 'styled-components';
+import {Input} from 'components/Inpute';
+import {Center} from 'components/Center';
+import {Space} from 'components/Space';
 
 type Params={
   id:string
 }
-const Topbar=styled.header`
+const InputWrapper = styled.div`
+  background-color:#fff;
+  padding: 0 16px;
+  margin-top: 12px;
+`;
+const Topbar = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center ;
   line-height: 20px;
   padding: 14px 16px ;
   background-color:#fff;
-`
+`;
 const EditTag:React.FC = ()=>{
   const {findTag}=useTags();
   let{id}=useParams<Params>();
@@ -24,18 +32,20 @@ const EditTag:React.FC = ()=>{
   return (
     <Layout>
       <Topbar>
-        <Icon name="left"/>
+        <Icon name="left"/>i
         <span>编辑标签</span>
         <Icon name="submit"/>
       </Topbar>
-      <div>
-        <span>标签名</span>
-        {tag.name}
-        <input type="text" placeholder="标签名"/>
-      </div>
-      <div>
+      <InputWrapper>
+        <Input label="标签名" type="text"  placeholder="标签名" value={tag.name}/>
+      </InputWrapper>
+      <Center>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
         <Button>删除标签</Button>
-      </div>
+      </Center>
     </Layout>
   )
 }
