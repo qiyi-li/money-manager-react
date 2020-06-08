@@ -32,6 +32,15 @@ const useTags = () => { //如此为： 封装一个自定义 Hook
     // 最后得到的就是 预期中的 tags
     setTags(tagsClone);
   };
-  return {tags: tags, setTags: setTags, findTag, updateTag, findTagIndex};
+  const deleteTag=(id:number)=>{
+    //获取需要更改的 tag 下标
+    const index = findTagIndex(id);
+    // 深拷贝 tags 得到 tagsClone
+    const tagsClone = JSON.parse(JSON.stringify(tags));
+    // 把 tagsClone 的第 index 删掉
+    tagsClone.splice(index, 1);
+    setTags(tagsClone)
+  }
+  return {tags: tags, setTags: setTags, findTag, updateTag, findTagIndex,deleteTag};
 };
 export {useTags}
