@@ -22,17 +22,27 @@ const useTags = () => { //如此为： 封装一个自定义 Hook
     }
     return result;
   };
+  let saveTagChange: { id: number, name: string }[];
   const updateTag = (id: number, obj: { name: string }) => {
+    setTags( tags.map( tag=> tag.id === id ? {id, name:obj.name} : tag ) );
+    saveTagChange = tags.map(tag => tag.id === id ? {id, name: obj.name} : tag);
+    /*
     //获取需要更改的 tag 下标
-    const index = findTagIndex(id);
-    // 深拷贝 tags 得到 tagsClone
-    const tagsClone = JSON.parse(JSON.stringify(tags));
-    // 把 tagsClone 的第 index 删掉，替换为 {id:id , name:obj,name}
-    tagsClone.splice(index, 1, {id: id, name: obj.name}); // 返回的是被删除的那一项
-    // 最后得到的就是 预期中的 tags
-    setTags(tagsClone);
+     const index = findTagIndex(id);
+     // 深拷贝 tags 得到 tagsClone
+     const tagsClone = JSON.parse(JSON.stringify(tags));
+     // 把 tagsClone 的第 index 删掉，替换为 {id:id , name:obj,name}
+     tagsClone.splice(index, 1, {id: id, name: obj.name}); // 返回的是被删除的那一项
+     // 最后得到的就是 预期中的 tags
+     setTags(tagsClone);
+     */
   };
-  const deleteTag=(id:number)=>{
+  const submitTag = () => {
+    setTags(saveTagChange);
+  };
+  const deleteTag = (id: number) => {
+    setTags(tags.filter(tag => tag.id !== id));
+    /*
     //获取需要更改的 tag 下标
     const index = findTagIndex(id);
     // 深拷贝 tags 得到 tagsClone
@@ -40,7 +50,8 @@ const useTags = () => { //如此为： 封装一个自定义 Hook
     // 把 tagsClone 的第 index 删掉
     tagsClone.splice(index, 1);
     setTags(tagsClone)
-  }
-  return {tags: tags, setTags: setTags, findTag, updateTag, findTagIndex,deleteTag};
+    */
+  };
+  return {tags: tags, setTags: setTags, findTag, updateTag, findTagIndex, submitTag, deleteTag};
 };
 export {useTags}

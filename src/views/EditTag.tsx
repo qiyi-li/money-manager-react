@@ -1,6 +1,6 @@
 import React from 'react';
 import {useTags} from 'useTags'
-import{useParams} from "react-router-dom";
+import{useParams,useHistory} from "react-router-dom";
 import Layout from "components/Layout"
 import Icon from 'components/Icon';
 import {Button} from 'components/Button';
@@ -27,7 +27,7 @@ const Topbar = styled.header`
 `;
 
 const EditTag: React.FC = () => {
-  const {findTag, updateTag, deleteTag} = useTags();
+  const {findTag, updateTag,submitTag, deleteTag} = useTags();
   let {id: idString} = useParams<Params>();
   const tag = findTag(parseInt(idString));
   const tagContent = (tag: { id: number, name: string }) => (
@@ -51,12 +51,16 @@ const EditTag: React.FC = () => {
       </Center>
     </div>
   );
+  const history = useHistory()
+  const onClickBack=()=>{
+    history.goBack()
+  }
   return (
     <Layout>
       <Topbar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
-        <Icon name="submit"/>
+        <Icon name="submit" onClick={submitTag}/>
       </Topbar>
       {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
 
