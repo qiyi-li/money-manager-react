@@ -1,11 +1,12 @@
 import Layout from '../components/Layout';
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 import {CategorySection} from './Money/CategorySection';
 import {NoteSection} from './Money/NoteSection';
 import {NumberPadSection} from './Money/NumberPadSection';
 import {TagsSection} from './Money/TagsSection';
-
+import {useRecords} from '../hooks/useRecords';
+/* eslint no-eval: 0 */
 
 const MyLayout = styled(Layout)`
   display:flex;
@@ -13,16 +14,30 @@ const MyLayout = styled(Layout)`
 `;
 
 type Category = '-' | '+'
+const defaultFormData = {
+  tagIds: [] as number[],
+  note: '',
+  category: '-' as Category,
+  amount: '0'
+};
 
 function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number[],
-    note: '',
-    category: '-' as Category,
-    amount: 0
-  });
+  const [selected, setSelected] = useState(defaultFormData);
+  const {addRecord} = useRecords();
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({...selected, ...obj});
+  };
+  const submit = () => {
+    let output =selected.amount
+     if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {
+       window.alert('计算错误');
+     } else if(eval(output)===0){
+       alert('请输入有效值')
+     }else{
+       addRecord(selected)
+       setSelected(defaultFormData)
+       alert('保存成功')
+     }
   };
   return (
     <MyLayout>
@@ -33,7 +48,9 @@ function Money() {
       <CategorySection value={selected.category}
                        onChange={category => onChange({category: category})}/>
       <NumberPadSection
-        onChange={amount => onChange({amount: amount})}/>
+        onChange={amount => onChange({amount: amount})}
+        onOk={submit}
+      />
     </MyLayout>
   );
 }
