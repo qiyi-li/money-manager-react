@@ -27,9 +27,13 @@ const Topbar = styled.header`
 `;
 
 const EditTag: React.FC = () => {
-  const {findTag, updateTag,submitTag, deleteTag} = useTags();
+  const {findTag, updateTag, deleteTag} = useTags();
   let {id: idString} = useParams<Params>();
   const tag = findTag(parseInt(idString));
+  const deleteAndBack=(id:number)=>{
+    deleteTag(id)
+    history.goBack()
+  }
   const tagContent = (tag: { id: number, name: string }) => (
     <div>
       <InputWrapper>
@@ -47,7 +51,7 @@ const EditTag: React.FC = () => {
         <Space/>
         <Space/>
         <Space/>
-        <Button onClick={() => deleteTag(tag.id)}>删除标签</Button>
+        <Button onClick={() => deleteAndBack(tag.id)}>删除标签</Button>
       </Center>
     </div>
   );
@@ -60,7 +64,7 @@ const EditTag: React.FC = () => {
       <Topbar>
         <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
-        <Icon name="submit" onClick={submitTag}/>
+        <Icon name="submit" onClick={()=>{window.alert('修改成功');history.goBack()}}/>
       </Topbar>
       {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
 
