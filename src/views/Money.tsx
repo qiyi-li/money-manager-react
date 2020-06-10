@@ -30,10 +30,13 @@ function Money() {
   const submit = () => {
     let output =selected.amount
      if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {
-       window.alert('计算错误');
+       return window.alert('计算错误');
      } else if(eval(output)===0){
-       alert('请输入有效值')
-     }else{
+       return alert('请输入有效值')
+     }else if(selected.tagIds.length===0){
+       return alert('请选择至少一个标签')
+     }
+     else{
        addRecord(selected)
        setSelected(defaultFormData)
        alert('保存成功')
