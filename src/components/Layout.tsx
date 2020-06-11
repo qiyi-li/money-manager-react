@@ -1,6 +1,7 @@
 import Nav from './Nav';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
+import {useRecords} from '../hooks/useRecords';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -12,18 +13,31 @@ const Main = styled.div`
   overflow: auto;
 `;
 
-type Props={
-
+type Props= {
+  className?: string
+  scrollTop?: number
 }
-const Layout = (props :any) => {
+const Layout: React.FC<Props> = (props) => {
+  const mainRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setTimeout(()=>{
+      if (!mainRef.current) {return;}
+      mainRef.current.scrollTop = props.scrollTop!
+    },0)
+  } , [props.scrollTop]);
+
   return (
     <Wrapper>
-      <Main className={props.className}>
+      <Main ref={mainRef} className={props.className}>
         {props.children}
       </Main>
       <Nav/>
     </Wrapper>
   );
 };
+
+Layout.defaultProps={
+  scrollTop:0
+}
 
 export default Layout;

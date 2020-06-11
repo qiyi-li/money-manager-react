@@ -45,7 +45,7 @@ function Money() {
     setSelected(defaultFormData)
   };
   return (
-    <MyLayout>
+    <MyLayout scrollTop={99999}>
       <TagsSection value={selected.tagIds}
                    onChange={tagIds => onChange({tagIds: tagIds})}/>
       <NoteSection value={selected.note}
