@@ -23,7 +23,6 @@ const defaultFormData = {
 const CategoryWrapper=styled.div`
   background-color:#c4c4c4;
 `
-
 function Money() {
   const [selected, setSelected] = useState(defaultFormData);
   const {addRecord} = useRecords();
@@ -32,17 +31,17 @@ function Money() {
   };
   const submit = () => {
     let output =selected.amount
-     if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {
-       return window.alert('计算错误');
-     } else if(eval(output)===0){
-       return alert('请输入有效值')
-     }else if(selected.tagIds.length===0){
-       return alert('请选择至少一个标签')
-     }
-     else{
-       addRecord(selected)
-       alert('保存成功')
-     }
+    if (output[output.length - 1] === '+' || output[output.length - 1] === '-') {
+     return window.alert('计算错误');
+    } else if(eval(output)===0){
+     return alert('请输入有效值')
+    }else if(selected.tagIds.length===0){
+     return alert('请选择至少一个标签')
+    }
+    else{
+     addRecord(selected)
+     alert('保存成功')
+    }
     setSelected(defaultFormData)
   };
   return (

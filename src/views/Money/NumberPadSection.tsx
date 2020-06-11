@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { Wrapper } from './NumberPadSection/Wrapper';
 import {generateOutput} from './NumberPadSection/generateOutput';
-// import Icon from '../../components/Icon';
 
 type Props={
   onChange: (value: string) => void
   onOk: () => void
+
 }
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState('0');
@@ -27,12 +27,13 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === null) {return;}
 
     if (text === 'ok') {
-      props.onOk();
-
+      setOutput('')
+      if (props.onOk) {props.onOk(); return}
     }
 
     if ('0123456789.+-'.split('').concat(['del', 'ok', 'AC']).indexOf(text) >= 0) {
       setOutput(generateOutput(text, output));
+      return
     }
   }
   return(

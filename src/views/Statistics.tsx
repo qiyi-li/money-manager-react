@@ -52,12 +52,12 @@ function Statistics() {
   const {getName} = useTags();
   const hash: { [K: string]: RecordItem[] } = {}; //{'2020-6-10': [item,item]}
   const selectedRecords = records.filter(r => r.category === category);
-  selectedRecords.map(r => {
+  selectedRecords.forEach(r => {
     const key = day(r.createdAt).format('YYYY年M月D日');
     if (!(key in hash)) {
       hash[key] = [];
     }
-    return hash[key].push(r);
+    hash[key].push(r);
   });
   const array = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0;
