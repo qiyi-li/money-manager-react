@@ -43,11 +43,7 @@ function Money() {
        addRecord(selected)
        alert('保存成功')
      }
-    console.log('before');
-    console.log(selected);
     setSelected(defaultFormData)
-    console.log('after');
-    console.log(selected);
   };
   return (
     <MyLayout>
