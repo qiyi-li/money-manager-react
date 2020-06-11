@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
 import day from 'dayjs';
+import {NavLink} from 'react-router-dom';
 
 
 const Item=styled.div`
@@ -29,6 +30,17 @@ const Header = styled.h3`
   padding: 10px 16px;
   line-height:  20px;
 `;
+const Prompt=styled.div`
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+  padding: 16px;
+  margin-top: 48px;
+`
+const Link=styled.span`
+  color: #fd6600;
+
+`
 
 const CategoryWrapper = styled.div`
   background-color:#fff;
@@ -53,41 +65,52 @@ function Statistics() {
     if (a[0] < b[0]) return 1;
     return 0;
   });
+  console.log(array);
   return (
     <Layout>
       <CategoryWrapper>
         <CategorySection value={category}
                          onChange={value => setCategory(value)}/>
       </CategoryWrapper>
-      {array.map(([date,records] )=>
-        <div key={date}>
-          <Header>{date}</Header>
-          <div>
-            {records.map(r => {
-              return (
-                <Item key={r.createdAt}>
-                  <div className="tags oneLine">
-                    {r.tagIds.map(tagId => <span key={tagId}> {getName(tagId)}</span>)
-                      /*.reduce((result,span,index,array)=>
-                        result.concat( index < array.length-1 ? [span,'，']:[span]),[]as ReactNode)*/
-                    }
-                  </div>
-                  {r.note &&
-                  <div className="note">
-                    {r.note}
-                  </div>
-                  }
-                  <div className="amount">
-                    ￥{r.amount}
-                  </div>
-                </Item>
-              );
-            })}
-          </div>
-        </div>)}
-      <div>
 
-      </div>
+
+       {
+          array.length!==0 ?
+            array.map(([date,records] )=>
+            <div key={date}>
+              <Header>{date}</Header>
+              <div>
+                {records.map(r => {
+                  return (
+                    <Item key={r.createdAt}>
+                      <div className="tags oneLine">
+                        {r.tagIds.map(tagId => <span key={tagId}> {getName(tagId)}</span>)
+                          /*.reduce((result,span,index,array)=>
+                            result.concat( index < array.length-1 ? [span,'，']:[span]),[]as ReactNode)*/
+                        }
+                      </div>
+                      {r.note &&
+                      <div className="note">
+                        {r.note}
+                      </div>
+                      }
+                      <div className="amount">
+                        ￥{r.amount}
+                      </div>
+                    </Item>
+                  );
+                })}
+              </div>
+            </div>)
+            :
+            <Prompt>
+              <NavLink to="/money">
+                暂无相关记录，点击 <Link>记账</Link> 记一笔吧
+              </NavLink>
+            </Prompt>
+        }
+
+
     </Layout>
   );
 }
