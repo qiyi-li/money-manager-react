@@ -54,6 +54,10 @@ const useTags = () => { //如此为： 封装一个自定义 Hook
       window.alert('标签名为空')
     }
   };
-  return {tags, setTags, findTag, updateTag, findTagIndex, deleteTag, addTag};
+  const getName = (id:number)=>{
+    const tag= tags.filter(t=>t.id===id)[0]
+    return tag? tag.name:'';
+  }
+  return {tags, setTags, findTag, updateTag,getName, findTagIndex, deleteTag, addTag};
 };
 export {useTags}
