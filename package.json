@@ -1,6 +1,7 @@
 {
   "name": "money-react",
   "version": "0.1.0",
+  "homepage": "https://a-lei-7.github.com/money-manager-react-weisite/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
