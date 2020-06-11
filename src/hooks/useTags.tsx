@@ -22,7 +22,7 @@ const useTags = () => { //如此为： 封装一个自定义 Hook
   // 实现在 非第一次渲染时执行
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
-  }, [tags]);//tags changed 执行 (必须是一个不可变数据)
+  }, tags);//tags changed 执行 (必须是一个不可变数据)
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
   const findTagIndex = (id: number) => {
     let result = -1;
