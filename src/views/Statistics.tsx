@@ -65,7 +65,6 @@ function Statistics() {
     if (a[0] < b[0]) return 1;
     return 0;
   });
-  console.log(array);
   return (
     <Layout>
       <CategoryWrapper>
