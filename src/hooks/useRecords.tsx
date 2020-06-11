@@ -11,7 +11,7 @@ type RecordItem = newRecordItem & {
   createdAt:string //ISO 8601
 }*/
 
-type RecordItem =  {
+export type RecordItem =  {
   createdAt:string //ISO 8601
   tagIds: number[]
   note: string
