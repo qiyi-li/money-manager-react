@@ -37,7 +37,7 @@ const Layout: React.FC<Props> = (props) => {
 if (document.documentElement.clientWidth > 500) {
   window.alert('为保证浏览效果，请用手机打开此页面');
   const img = document.createElement('img',);
-  img.src = './qrcode-r.png';
+  img.src = 'qrcode-r.png';
   img.style.position = 'fixed';
   img.style.left = '50%';
   img.style.top = '50%';
