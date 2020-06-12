@@ -1,7 +1,7 @@
 {
   "name": "money-react",
   "version": "0.1.0",
-  "homepage": "https://a-lei-7.github.com/money-manager-react-weisite/",
+  "homepage": "https://a-lei-7.github.com/money-manager-react-website",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
@@ -78,7 +78,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy": "sh scripts/deploy.sh"
+    "deploy:github": "sh scripts/deploy_github.sh",
+    "deploy:gitee": "sh scripts/deploy_gitee.sh",
+    "deploy": "yarn deploy:gitee && yarn deploy:github"
   },
   "eslintConfig": {
     "extends": "react-app"
